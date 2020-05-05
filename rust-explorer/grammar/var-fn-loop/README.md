@@ -24,6 +24,8 @@ char 类型是语言中最原生的字母类型
 
 
 Rust 有两个原生的复合类型：元组（tuple）和数组（array）。
+let tup1:(i8,i8)
+let arr:[i8;3]
 
 
 

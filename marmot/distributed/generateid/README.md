@@ -4,7 +4,7 @@
 
 2 数据库多主模式：多个master生成id
 
-号段模式:从数据库里面取出数据，放置到内存里面
+3 号段模式:从数据库里面取出数据，放置到内存里面
 ```
 CREATE TABLE id_generator (
   id int(10) NOT NULL,
@@ -15,7 +15,7 @@ CREATE TABLE id_generator (
   PRIMARY KEY (`id`)
 ) 
 ```
+4 雪花算法SnowFlake
 
-Redis
+5 利用一些分布式缓存的并发加减，例如redis，memcached
 
-雪花算法SnowFlake
