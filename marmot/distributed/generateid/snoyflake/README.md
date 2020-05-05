@@ -7,3 +7,10 @@
 8 bits for a sequence number
 16 bits for a machine id
 ```
+其实这个算法还有改进的空间
+
+1 获取ip4的值
+
+2 每10毫秒256个，1秒2.56w个id其实不算多
+
+

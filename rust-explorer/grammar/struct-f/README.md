@@ -56,4 +56,8 @@ impl Rectangle {
     使用::语法，Strings::from("abc")
 
 多个impl块
- 
+
+
+
+
+
