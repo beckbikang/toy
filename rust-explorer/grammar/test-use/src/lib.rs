@@ -16,3 +16,6 @@ struct point{
     x:i32,
     y:i32,
 }
+impl Point {
+    fn compaire
+}

@@ -11,8 +11,23 @@ fn main() {
     let largRet = lager2(&list1);
 
     println!("largRet={}", largRet);
+
+    //longest data
+    let string1 = String::from("xxx00");
+    let string2 = "1231";
+
+    let result = longestStr(string1.as_str(), string2);
+    println!("{}",result);
+
 }
 
+fn longestStr<'a>(x :&'a str, y :&'a str)->&'a str{
+    if x.len() > y.len(){
+        x
+    }else {
+        y
+    }
+}
 
 
 fn lager2<T>(list:&[T]) -> T
