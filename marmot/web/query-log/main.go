@@ -12,6 +12,5 @@ var (
 
 func main() {
 	flag.Parse()
-	lauch.InitLauch(confRoot, env)
-
+	lauch.InitLauch(*confRoot, *env)
 }

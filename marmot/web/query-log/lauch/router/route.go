@@ -10,6 +10,7 @@ func InitRouter(engine*gin.Engine){
 
 	v2 := engine.Group("/v2")
 	{
+		v2.GET("/ping", controller.Ping)
 		//v2.GET("/log/filted/lists.json",)
 	}
 

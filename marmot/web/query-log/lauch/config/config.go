@@ -60,7 +60,8 @@ type ServerCfg struct {
 	ReadTimeout  int    `toml:"read_timeout'`
 	WriteTimeout int    `toml:"write_timeout'`
 	ConfigPath   string `toml:"config_path'`
-	MaxBodyBytes string `toml:"max_body_bytes"`
+	MaxBodyBytes int `toml:"max_body_bytes"`
+	CancelTimeout int `cancel_timeout`
 }
 
 type AppCfg struct {
