@@ -3,6 +3,7 @@ package lauch
 import (
 	"context"
 	"log"
+
 	"net/http"
 	"os"
 	"os/signal"
@@ -10,30 +11,21 @@ import (
 	"time"
 	"toy/marmot/web/query-log/lauch/config"
 	"toy/marmot/web/query-log/lauch/engine"
+	"flag"
 )
 
+var (
+	confRoot = flag.String("path", "./conf", "root path of configuration")
+	env      = flag.String("env", "dev", "prod or dev or test")
+)
 
-func  InitLauch(confRoot, env string){
+func  InitLauch(){
+	flag.Parse()
 
-	config.LoadGlobalConfig(confRoot, env)
+	config.LoadGlobalConfig(*confRoot, *env)
 
-	//init engine
-	eg := engine.InitEngine()
-
-	addr := config.Gcfg.GetString("server.addr")
-	readTimeout := config.Gcfg.GetInt("server.read_timeout")
-	writeTimeout := config.Gcfg.GetInt("server.write_timeout")
-	maxHeaderBytes:= config.Gcfg.GetInt("server.max_body_bytes")
-
-
-	//init server
-	srv := &http.Server{
-		Addr: addr,
-		Handler:        eg,
-		ReadTimeout:   time.Duration(readTimeout)  * time.Second,
-		WriteTimeout:   time.Duration(writeTimeout) * time.Second,
-		MaxHeaderBytes: maxHeaderBytes,
-	}
+	//get server
+	srv := engine.InitHttpServer()
 
 	//run
 	go func(){
@@ -67,6 +59,8 @@ func  InitLauch(confRoot, env string){
 	//stop
 	log.Println("server stop")
 }
+
+
 
 
 

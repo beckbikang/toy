@@ -568,6 +568,174 @@ type neuteredReaddirFile struct {
 ```
 
 
+tree.go
+
+```
+type methodTree struct {
+	method string
+	root   *node
+}
+
+type Param struct {
+	Key   string
+	Value string
+}
+
+比较大小
+比较字符串的最长相等部分
+计算param中:和*的个数
+
+
+
+
+type nodeType uint8
+
+const (
+	static nodeType = iota // 普通节点，默认
+	root // 根节点
+	param // 参数路由，比如 /user/:id
+	catchAll // 匹配所有内容的路由，比如 /article/*key
+)
+
+
+//节点支持的通配符
+type node struct {
+	path      string //URL
+	indices   string //字节点的首字母拼成的string，顺序与 children 一致
+	wildChild bool // 是否是泛匹配
+	nType     nodeType //节点类型
+	priority  uint32 //优先级
+	children  []*node //子节点
+	handlers  HandlersChain //处理函数
+	fullPath  string //全路径
+}
+
+增加某一个child的权重，incrementChildPrio(pos int)
+
+
+如果某个节点的 handlers为空，则说明该节点对应的路由不存在。比如上面定义的根节点对应的路由 /in 是不存在的，它的 handlers就是[]。
+
+param 与 catchAll 使用的区别就是 : 与 * 的区别。* 会把路由后面的所有内容赋值给参数 key；但 : 可以多次使用。
+比如：/user/:id/:no 是合法的，但 /user/*id/:no 是非法的，因为 * 后面所有内容会赋值给参数 id
+
+
+插入子节点insertChild(path string, fullPath string, handlers HandlersChain)
+	
+	1 查找通配符，找不到，直接在当前路径加入改元素即可
+	2 如果匹配到:
+		2.1 设置前置路径，设置通配匹配符
+		2.2 增加一个全路径的匹配节点，参数类的，这个节点权重为1
+		2.3 增加一个权重为1的子节点数，设置处理器函数
+	3 处理*数据
+		3.1 增加获取所有类型的节点
+		3.2 增加处理器节点
+
+
+findWildcard,查找到通配符，主要是  :和*
+
+
+longestCommonPrefix找到最长的可匹配路径
+
+
+addRoute添加路由处理
+
+
+
+节点的值
+type nodeValue struct {
+	handlers HandlersChain//处理函数
+	params   *Params//key参数指针
+	tsr      bool
+	fullPath string//全部路径
+}
+
+增加root节点
+
+	
+
+
+
+
+
+把数组分成4字节数组
+
+
+```
+
+
+binding的处理
+
+
+
+### binding包
+
+支持的类型
+
+```
+const (
+	MIMEJSON              = "application/json"
+	MIMEHTML              = "text/html"
+	MIMEXML               = "application/xml"
+	MIMEXML2              = "text/xml"
+	MIMEPlain             = "text/plain"
+	MIMEPOSTForm          = "application/x-www-form-urlencoded"
+	MIMEMultipartPOSTForm = "multipart/form-data"
+	MIMEPROTOBUF          = "application/x-protobuf"
+	MIMEMSGPACK           = "application/x-msgpack"
+	MIMEMSGPACK2          = "application/msgpack"
+	MIMEYAML              = "application/x-yaml"
+)
+```
+
+定义接口
+
+```
+type Binding interface {
+	Name() string
+	Bind(*http.Request, interface{}) error
+}
+
+type BindingBody interface {
+	Binding
+	BindBody([]byte, interface{}) error
+}
+
+type BindingUri interface {
+	Name() string
+	BindUri(map[string][]string, interface{}) error
+}
+
+type StructValidator interface {
+	ValidateStruct(interface{}) error
+	Engine() interface{}
+}
+
+var Validator StructValidator = &defaultValidator{}
+
+各类绑定器
+JSON          = jsonBinding{}
+XML           = xmlBinding{}
+Form          = formBinding{}
+Query         = queryBinding{}
+FormPost      = formPostBinding{}
+FormMultipart = formMultipartBinding{}
+ProtoBuf      = protobufBinding{}
+MsgPack       = msgpackBinding{}
+YAML          = yamlBinding{}
+Uri           = uriBinding{}
+Header        = headerBinding{}
+
+
+
+使用validater
+type defaultValidator struct {
+	once     sync.Once
+	validate *validator.Validate
+}
+
+var _ StructValidator = &defaultValidator{}
+```
+
 
 ### ginS
 
