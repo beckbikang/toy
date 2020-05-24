@@ -5,6 +5,7 @@ import (
 
 	"toy/marmot/web/query-log/controller/response"
 	"log"
+	"WEIBO/go/src/net/http"
 )
 
 func GetResultFail(c *gin.Context,err error){
@@ -13,7 +14,7 @@ func GetResultFail(c *gin.Context,err error){
 	resultObj.Code = response.Failed
 	resultObj.Msg = err.Error()
 	c.JSON(
-		200,
+		http.StatusOK,
 		resultObj,
 	)
 }
@@ -23,7 +24,7 @@ func GetResultSuccess(c *gin.Context,ret interface{}){
 	resultObj.Code = response.Success
 	resultObj.Result = ret
 	c.JSON(
-		200,
+		http.StatusOK,
 		resultObj,
 	)
 }
