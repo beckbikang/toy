@@ -62,14 +62,6 @@ step6
 数据表的格式
 
 ```sql
-
-CREATE TABLE `log_id_generator` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `gtype` int(11) NOT NULL COMMENT '生成器类型 1 日志',
-  `mtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
 CREATE TABLE `log_1` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键ID',
   `uid` bigint(20) unsigned NOT NULL COMMENT 'uid',
@@ -94,8 +86,8 @@ CREATE TABLE `log_2` (
 
 CREATE TABLE `log_content_1` (
   `id` bigint unsigned NOT NULL DEFAULT '0' COMMENT '日志ID',
-  `from` text NOT NULL COMMENT '修改前',
-  `to` text NOT NULL COMMENT '修改后',
+  `cfrom` text NOT NULL COMMENT '修改前',
+  `cto` text NOT NULL COMMENT '修改后',
   `mtime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='日志修改内容表';
@@ -103,8 +95,8 @@ CREATE TABLE `log_content_1` (
 
 CREATE TABLE `log_content_2` (
   `id` bigint unsigned NOT NULL DEFAULT '0' COMMENT '日志ID',
-  `from` text NOT NULL COMMENT '修改前',
-  `to` text NOT NULL COMMENT '修改后',
+  `cfrom` text NOT NULL COMMENT '修改前',
+  `cto` text NOT NULL COMMENT '修改后',
   `mtime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='日志修改内容表' ;

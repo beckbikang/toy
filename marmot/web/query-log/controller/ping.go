@@ -5,8 +5,9 @@ import (
 )
 
 func Ping(ctx *gin.Context) {
-	ctx.JSON(
-		200, gin.H{
+
+	GetResultSuccess(ctx,
+		gin.H{
 			"msg": "pong",
 		},
 	)

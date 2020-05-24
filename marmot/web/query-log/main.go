@@ -1,10 +1,10 @@
 package main
 
 import (
-	"toy/marmot/web/query-log/lauch"
+	"toy/marmot/web/query-log/launch"
 )
 
-//lauch server
+//launch server
 func main() {
-	lauch.InitLauch()
+	launch.InitLaunch()
 }

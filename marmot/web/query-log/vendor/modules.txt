@@ -2,7 +2,9 @@
 github.com/davecgh/go-spew/spew
 # github.com/didi/gendry v1.3.2
 ## explicit
+github.com/didi/gendry/builder
 github.com/didi/gendry/manager
+github.com/didi/gendry/scanner
 # github.com/fsnotify/fsnotify v1.4.9
 ## explicit
 github.com/fsnotify/fsnotify

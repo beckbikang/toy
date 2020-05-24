@@ -1,6 +1,13 @@
+package immutable
+
+
+type DataPram map[string]interface{}
+
 const (
-	/**
-		
-	**/
-	DATA_PARAM = map[string]interface{}
+	LogTypeAccount = 1
+	LogTypeCampaign
+	LogTypeAd
+	LogTypeCreative
+	LogTypeProduct
+
 )
