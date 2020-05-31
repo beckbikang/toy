@@ -7,6 +7,22 @@ config_path = "./conf"
 max_body_bytes = 1048576
 cancel_timeout = 3
 
+
+[jackcfg]
+filename="test.log"
+maxsize=500
+maxage=7
+maxbackups=1000
+localtime=true
+compress=false
+
+[zapcfgs]
+[zapcfgs.1]
+level="info"
+isdev=true
+logmod=3
+servername="query-log"
+
 [app]
 test=123
 

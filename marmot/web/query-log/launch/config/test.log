@@ -1,0 +1,12 @@
+{"level":"info","time":"2020-05-31 22-55-32.001","line":"/Users/macy/go/src/toy/marmot/web/query-log/launch/config/config_test.go:45","data":"a test","server":"query-log"}
+{"level":"info","time":"2020-05-31 22-55-32.001","line":"/Users/macy/go/src/toy/marmot/web/query-log/launch/config/config_test.go:46","data":"abc","server":"query-log","int":11}
+{"level":"info","time":"2020-05-31 22-56-11.771","line":"/Users/macy/go/src/toy/marmot/web/query-log/launch/config/config_test.go:46","data":"a test","server":"query-log"}
+{"level":"info","time":"2020-05-31 22-56-11.771","line":"/Users/macy/go/src/toy/marmot/web/query-log/launch/config/config_test.go:47","data":"abc","server":"query-log","int":11}
+{"level":"info","time":"2020-05-31 22-56-55.598","line":"/Users/macy/go/src/toy/marmot/web/query-log/launch/config/config_test.go:46","data":"a test","server":"query-log"}
+{"level":"info","time":"2020-05-31 22-56-55.599","line":"/Users/macy/go/src/toy/marmot/web/query-log/launch/config/config_test.go:47","data":"abc","server":"query-log","int":11}
+{"level":"info","time":"2020-05-31 23-00-20.810","line":"/Users/macy/go/src/toy/marmot/web/query-log/launch/config/config_test.go:46","data":"a test","server":"query-log"}
+{"level":"info","time":"2020-05-31 23-00-20.811","line":"/Users/macy/go/src/toy/marmot/web/query-log/launch/config/config_test.go:47","data":"abc","server":"query-log","int":11}
+{"level":"info","time":"2020-05-31 23-06-04.267","line":"/Users/macy/go/src/toy/marmot/web/query-log/launch/config/config_test.go:46","data":"a test","server":"query-log"}
+{"level":"info","time":"2020-05-31 23-06-04.267","line":"/Users/macy/go/src/toy/marmot/web/query-log/launch/config/config_test.go:47","data":"abc","server":"query-log","int":11}
+{"level":"info","time":"2020-05-31 23-09-50.870","line":"/Users/macy/go/src/toy/marmot/web/query-log/launch/config/config_test.go:46","data":"a test","server":"query-log"}
+{"level":"info","time":"2020-05-31 23-09-50.870","line":"/Users/macy/go/src/toy/marmot/web/query-log/launch/config/config_test.go:47","data":"abc","server":"query-log","int":11}

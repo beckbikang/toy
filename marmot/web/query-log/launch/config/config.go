@@ -3,6 +3,8 @@ package config
 import (
 	"fmt"
 
+	"github.com/beckbikang/flg"
+
 	"github.com/fsnotify/fsnotify"
 	"github.com/spf13/viper"
 )
@@ -15,6 +17,10 @@ var (
 func init() {
 	globalConfObject = new(Configer)
 	Gcfg = viper.New()
+}
+
+func GetGlobalConfObject() *Configer {
+	return globalConfObject
 }
 
 func LoadGlobalConfig(configPath, configFileName string) {
@@ -44,7 +50,7 @@ func LoadGlobalConfig(configPath, configFileName string) {
 }
 
 func showSetting() {
-	fmt.Sprintf("globalConfObject:%+v", globalConfObject)
+	fmt.Printf("globalConfObject:%+v", globalConfObject)
 }
 
 type Configer struct {
@@ -52,16 +58,19 @@ type Configer struct {
 	App    AppCfg    `toml:"app"`
 	Log    LogCfg    `toml:"log"`
 	Mysql  MysqlCfg  `toml:"mysql"`
+
+	Lfg  flg.LConfig            `toml:"jackcfg"`
+	Zfgs map[string]flg.ZConfig `toml:"zapcfgs"`
 }
 
 type ServerCfg struct {
-	Address      string `toml:"addr'`
-	RunMod       string `toml:"run_mode'`
-	ReadTimeout  int    `toml:"read_timeout'`
-	WriteTimeout int    `toml:"write_timeout'`
-	ConfigPath   string `toml:"config_path'`
-	MaxBodyBytes int `toml:"max_body_bytes"`
-	CancelTimeout int `cancel_timeout`
+	Address       string `toml:"addr'`
+	RunMod        string `toml:"run_mode'`
+	ReadTimeout   int    `toml:"read_timeout'`
+	WriteTimeout  int    `toml:"write_timeout'`
+	ConfigPath    string `toml:"config_path'`
+	MaxBodyBytes  int    `toml:"max_body_bytes"`
+	CancelTimeout int    `cancel_timeout`
 }
 
 type AppCfg struct {
