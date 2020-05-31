@@ -7,11 +7,14 @@ import (
 )
 
 var (
-	Flg  *zap.Logger
-	gflg *flg.Logger
+	LOGGER  *zap.Logger
+	Gflg *flg.Logger
 )
 
 func InitLog() *zap.Logger {
+
+	Gflg = &flg.Logger{}
+
 	var lcfg flg.FConfig
 	lcfg.Lfg.Filename = cfg.Gcfg.GetString("jackcfg.filename")
 	lcfg.Lfg.MaxSize = cfg.Gcfg.GetInt("jackcfg.maxsize")
@@ -20,19 +23,19 @@ func InitLog() *zap.Logger {
 	lcfg.Lfg.LocalTime = cfg.Gcfg.GetBool("jackcfg.localtime")
 	lcfg.Lfg.Compress = cfg.Gcfg.GetBool("jackcfg.compress")
 	lcfg.Zfgs = make(map[string]flg.ZConfig)
-	lcfg.Zfgs["1"] = flg.ZConfig{Level: Gcfg.GetString("zapcfgs.1.level"),
+	lcfg.Zfgs["1"] = flg.ZConfig{Level: cfg.Gcfg.GetString("zapcfgs.1.level"),
 		IsDev:      cfg.Gcfg.GetBool("zapcfgs.1.isdev"),
 		LogMod:     int8(cfg.Gcfg.GetInt("zapcfgs.1.logmod")),
 		ServerName: cfg.Gcfg.GetString("zapcfgs.1.servername")}
 	var err error
-	err = gflg.LoadFromObject(&lcfg)
+	err = Gflg.LoadFromObject(&lcfg)
 	if err != nil {
 		panic("LoadFromObject faild")
 	}
-	Flg, err = l.GetLogByKey(fconfig.Zfgs["1"].ServerName)
+	LOGGER, err = Gflg.GetLogByKey(lcfg.Zfgs["1"].ServerName)
 	if err != nil {
 		panic("get log faild")
 	}
 
-	return Flg
+	return LOGGER
 }

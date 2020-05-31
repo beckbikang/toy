@@ -9,7 +9,7 @@ cancel_timeout = 3
 
 
 [jackcfg]
-filename="test.log"
+filename="/data0/applogs/query-log/query-log.log"
 maxsize=500
 maxage=7
 maxbackups=1000

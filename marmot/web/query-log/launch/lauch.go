@@ -2,7 +2,6 @@ package launch
 
 import (
 	"flag"
-	"fmt"
 	"toy/marmot/web/query-log/launch/config"
 	"toy/marmot/web/query-log/launch/db"
 	"toy/marmot/web/query-log/launch/engine"
@@ -19,13 +18,13 @@ func InitLaunch() {
 	config.LoadGlobalConfig(*confRoot, *env)
 	db.InitDb()
 	engine.InitLauchHttpServer()
-	fg := kl.InitLog()
+	kl.InitLog()
 
 	//defer
 	defer func() {
 		db.GetDb().Close()
-		fg.Sync()
+		kl.LOGGER.Sync()
 	}()
 
-	fmt.Println("server end at launch")
+	kl.LOGGER.Info("server end at launch")
 }
