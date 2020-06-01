@@ -11,13 +11,12 @@ step1 基础功能
     restfull接口
     使用gin框架
     数据库查询 didi/gendry， 实现简单的查询，不期望通过orm，获取结果
-    使用日志库记录日志
+    使用日志库记录日志:zapper和lumberjack写入日志
 
 step2 中间件
 
     支持参数检测
     使用redis的cache
-    几乎zapper和lumberjack写入日志
     完善代码结构
     swagger
     基于net/http/httptest 的单元测试
