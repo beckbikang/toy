@@ -4,10 +4,30 @@ import (
 	"strconv"
 	"toy/marmot/web/query-log/biz/service"
 	"toy/marmot/web/query-log/model/entity"
-
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
+	"github.com/go-playground/locales/zh"
+	ut "github.com/go-playground/universal-translator"
+	zht "github.com/go-playground/validator/v10/translations/zh"
+	"fmt"
 )
+
+var (
+	uni      *ut.UniversalTranslator
+	validate *validator.Validate
+	trans ut.Translator
+)
+
+func init(){
+	z := zh.New()
+	uni = ut.New(z,z)
+	trans, _ = uni.GetTranslator("zh")
+	validate = validator.New()
+
+	zht.RegisterDefaultTranslations(validate, trans)
+
+}
+
 
 func getQueryStr(c *gin.Context) (*entity.LogQuery, error) {
 	//uid
@@ -63,11 +83,13 @@ func getQueryStr(c *gin.Context) (*entity.LogQuery, error) {
 	query.Page = page
 	query.PageSize = pageSize
 
+
+	//tans
 	//validator
-	vald := validator.New()
-	err = vald.Struct(query)
+	err = validate.Struct(query)
 	if err != nil {
-		GetResultFail(c, err)
+		errs := err.(validator.ValidationErrors)
+		GetResultFail(c, fmt.Errorf("%s", errs.Translate(trans)))
 		return nil, err
 	}
 
