@@ -11,11 +11,11 @@ type LogEntity struct {
 
 //log query
 type LogQuery struct {
-	Uid int64
-	LogType int
-	LogTargetId int
-	StartTime string
-	EndTime string
-	Page int
-	PageSize int
+	Uid         int64 `validate:"required"`
+	LogType     int   `validate:"gte=0"`
+	LogTargetId int   `validate:"gte=0"`
+	StartTime   string
+	EndTime     string
+	Page        int `validate:"required,number"`
+	PageSize    int `validate:"required,number"`
 }
