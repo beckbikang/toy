@@ -42,7 +42,7 @@ func(ldm *LogDaoMysql) GetLogData(query *entity.LogQuery) ([]entity.LogEntity,er
 	endTime := query.EndTime
 
 	if startTime == ""{
-		startTime = util.GetBeforeDate(7)
+		startTime = util.GetBeforeDate(1024)
 	}
 
 	if endTime == ""{
@@ -96,10 +96,6 @@ func(ldm *LogDaoMysql) GetLogData(query *entity.LogQuery) ([]entity.LogEntity,er
 	var logEntitys []entity.LogEntity
 	scanner.Scan(rows, &logEntitys)
 	return logEntitys, nil
-
-
-
-
 
 
 

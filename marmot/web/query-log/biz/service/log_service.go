@@ -2,6 +2,7 @@ package service
 
 import (
 	"log"
+	"fmt"
 	"toy/marmot/web/query-log/controller/response"
 	dao "toy/marmot/web/query-log/model/Dao"
 	"toy/marmot/web/query-log/model/entity"
@@ -15,7 +16,7 @@ func GetLogData(query *entity.LogQuery) ([]response.LogResultIn, error) {
 	logData, err := logDao.GetLogData(query)
 	if err != nil || len(logData) <= 0 {
 		log.Printf("fetch error :%v", err)
-		return nil, fmt.
+		return nil, fmt.Errorf("fetch empty")
 	}
 
 	resultList := make([]response.LogResultIn, len(logData))
