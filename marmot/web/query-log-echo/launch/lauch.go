@@ -2,10 +2,10 @@ package launch
 
 import (
 	"flag"
-	"toy/marmot/web/query-log/launch/config"
-	"toy/marmot/web/query-log/launch/db"
-	"toy/marmot/web/query-log/launch/engine"
-	kl "toy/marmot/web/query-log/launch/log"
+	"toy/marmot/web/query-log-echo/launch/config"
+	"toy/marmot/web/query-log-echo/launch/db"
+	"toy/marmot/web/query-log-echo/launch/engine"
+	kl "toy/marmot/web/query-log-echo/launch/log"
 )
 
 var (

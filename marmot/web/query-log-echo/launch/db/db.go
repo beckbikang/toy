@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/url"
 	"sync"
-	"toy/marmot/web/query-log/launch/config"
+	"toy/marmot/web/query-log-echo/launch/config"
 
 	"github.com/didi/gendry/manager"
 	_ "github.com/go-sql-driver/mysql"

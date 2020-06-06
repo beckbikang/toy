@@ -2,9 +2,9 @@ package controller
 
 import (
 	"strconv"
-	"toy/marmot/web/query-log/biz/service"
-	"toy/marmot/web/query-log/model/entity"
-	"github.com/gin-gonic/gin"
+	"toy/marmot/web/query-log-echo/biz/service"
+	"toy/marmot/web/query-log-echo/model/entity"
+	"github.com/labstack/echo/v4"
 	"github.com/go-playground/validator/v10"
 	"github.com/go-playground/locales/zh"
 	ut "github.com/go-playground/universal-translator"
@@ -29,48 +29,67 @@ func init(){
 }
 
 
-func getQueryStr(c *gin.Context) (*entity.LogQuery, error) {
+func getQueryStr(c echo.Context) (*entity.LogQuery, error) {
 	//uid
-	uidStr := c.DefaultQuery("uid", "0")
-	uid, err := strconv.ParseInt(uidStr, 10, 64)
-	if err != nil {
-		GetResultFail(c, err)
-		return nil, err
+	uidStr := c.QueryParam("uid")
+	var err error
+	var uid int64 = 0
+	if uidStr != ""{
+		uid, err = strconv.ParseInt(uidStr, 10, 64)
+		if err != nil {
+			GetResultFail(c, err)
+			return nil, err
+		}
 	}
 
 	//log type
-	logTypeStr := c.DefaultQuery("log_type", "0")
-	logType, err := strconv.Atoi(logTypeStr)
-	if err != nil {
-		GetResultFail(c, err)
-		return nil, err
+	logTypeStr := c.QueryParam("log_type")
+	var logType = 0
+	if logTypeStr != ""{
+		logType, err = strconv.Atoi(logTypeStr)
+		if err != nil {
+			GetResultFail(c, err)
+			return nil, err
+		}
 	}
+
 
 	//log target id
-	logTargetIdStr := c.DefaultQuery("log_target_id", "0")
-	logTargetId, err := strconv.Atoi(logTargetIdStr)
-	if err != nil {
-		GetResultFail(c, err)
-		return nil, err
+	logTargetIdStr := c.QueryParam("log_target_id")
+	var logTargetId = 0
+	if logTargetIdStr != ""{
+		logTargetId, err = strconv.Atoi(logTargetIdStr)
+		if err != nil {
+			GetResultFail(c, err)
+			return nil, err
+		}
 	}
 
-	startTime := c.DefaultQuery("start_time", "")
-	endTime := c.DefaultQuery("end_time", "")
+
+	startTime := c.QueryParam("start_time")
+	endTime := c.QueryParam("end_time")
 
 	//page
-	pageStr := c.DefaultQuery("page", "1")
-	page, err := strconv.Atoi(pageStr)
-	if err != nil {
-		GetResultFail(c, err)
-		return nil, err
+	pageStr := c.QueryParam("page")
+	var page = 1
+	if  pageStr != ""{
+		page, err = strconv.Atoi(pageStr)
+		if err != nil {
+			GetResultFail(c, err)
+			return nil, err
+		}
 	}
 
+
 	//page size
-	pageSizeStr := c.DefaultQuery("page_size", "20")
-	pageSize, err := strconv.Atoi(pageSizeStr)
-	if err != nil {
-		GetResultFail(c, err)
-		return nil, err
+	pageSizeStr := c.QueryParam("page_size")
+	var pageSize = 20
+	if pageSizeStr != ""{
+		pageSize, err = strconv.Atoi(pageSizeStr)
+		if err != nil {
+			GetResultFail(c, err)
+			return nil, err
+		}
 	}
 
 	//build query object
@@ -97,11 +116,11 @@ func getQueryStr(c *gin.Context) (*entity.LogQuery, error) {
 }
 
 //获取日志列表
-func OpLogList(c *gin.Context) {
+func OpLogList(c echo.Context) error{
 
 	query, err := getQueryStr(c)
 	if err != nil {
-		return
+		return err
 	}
 
 	ret, err := service.GetLogData(query)
@@ -111,4 +130,5 @@ func OpLogList(c *gin.Context) {
 	} else {
 		GetResultSuccess(c, ret)
 	}
+	return nil
 }

@@ -3,7 +3,7 @@ package log
 import (
 	"github.com/beckbikang/flg"
 	"go.uber.org/zap"
-	cfg "toy/marmot/web/query-log/launch/config"
+	cfg "toy/marmot/web/query-log-echo/launch/config"
 )
 
 var (

@@ -1,12 +1,13 @@
 package router
 
 import (
-	"github.com/gin-gonic/gin"
-	"toy/marmot/web/query-log/controller"
+
+	"github.com/labstack/echo/v4"
+	"toy/marmot/web/query-log-echo/controller"
 )
 
 
-func InitRouter(engine*gin.Engine){
+func InitRouter(engine*echo.Echo){
 
 	v2 := engine.Group("/v2")
 	{

@@ -3,10 +3,10 @@ package service
 import (
 	"log"
 	"fmt"
-	"toy/marmot/web/query-log/controller/response"
-	dao "toy/marmot/web/query-log/model/Dao"
-	"toy/marmot/web/query-log/model/entity"
-	"toy/marmot/web/query-log/model/mysql"
+	"toy/marmot/web/query-log-echo/controller/response"
+	dao "toy/marmot/web/query-log-echo/model/Dao"
+	"toy/marmot/web/query-log-echo/model/entity"
+	"toy/marmot/web/query-log-echo/model/mysql"
 )
 
 func GetLogData(query *entity.LogQuery) ([]response.LogResultIn, error) {

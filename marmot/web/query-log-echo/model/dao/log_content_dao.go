@@ -1,7 +1,7 @@
 package dao
 
 import (
-	"toy/marmot/web/query-log/model/entity"
+	"toy/marmot/web/query-log-echo/model/entity"
 )
 
 //deal with log content

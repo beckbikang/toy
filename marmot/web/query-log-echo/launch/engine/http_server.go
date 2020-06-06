@@ -8,7 +8,7 @@ import (
 	"os/signal"
 	"syscall"
 	"time"
-	"toy/marmot/web/query-log/launch/config"
+	"toy/marmot/web/query-log-echo/launch/config"
 )
 
 func InitLauchHttpServer() {

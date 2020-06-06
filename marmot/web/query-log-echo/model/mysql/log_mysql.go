@@ -1,12 +1,12 @@
 package mysql
 
 import (
-	"toy/marmot/web/query-log/util"
-	"toy/marmot/web/query-log/model/entity"
+	"toy/marmot/web/query-log-echo/util"
+	"toy/marmot/web/query-log-echo/model/entity"
 	log "log"
 	"fmt"
 	"github.com/didi/gendry/builder"
-	"toy/marmot/web/query-log/launch/db"
+	"toy/marmot/web/query-log-echo/launch/db"
 	"github.com/didi/gendry/scanner"
 )
 

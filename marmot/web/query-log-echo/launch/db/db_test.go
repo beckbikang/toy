@@ -2,11 +2,11 @@ package db
 
 import (
 	"testing"
-	"toy/marmot/web/query-log/launch/config"
+	"toy/marmot/web/query-log-echo/launch/config"
 	"github.com/didi/gendry/builder"
 	"github.com/didi/gendry/scanner"
 
-	"toy/marmot/web/query-log/model/entity"
+	"toy/marmot/web/query-log-echo/model/entity"
 
 	"github.com/stretchr/testify/assert"
 

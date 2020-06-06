@@ -1,19 +1,34 @@
 package engine
 
 import (
-	"toy/marmot/web/query-log/launch/config"
-	"toy/marmot/web/query-log/launch/router"
+	"toy/marmot/web/query-log-echo/launch/config"
+	"toy/marmot/web/query-log-echo/launch/router"
 
-	"github.com/gin-gonic/gin"
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
-func InitEngine() *gin.Engine {
+const (
+	DebugDesc = "debug"
+)
 
-	engine := gin.New()
+
+func InitEngine() *echo.Echo {
+
+
+
+	engine := echo.New()
 
 	//init middleware
-	engine.Use(gin.Logger(), gin.Recovery())
-	gin.SetMode(config.Gcfg.GetString("server.run_mode"))
+	engine.Use(middleware.Logger())
+	engine.Use(middleware.Recover())
+
+	//debug
+	engine.Debug = false
+	if DebugDesc == config.Gcfg.GetString("server.run_mode"){
+		engine.Debug = true
+	}
+
 
 	//init router
 	router.InitRouter(engine)

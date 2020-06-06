@@ -8,8 +8,8 @@ import (
 	"github.com/didi/gendry/builder"
 	"github.com/didi/gendry/scanner"
 
-	"toy/marmot/web/query-log/model/entity"
-	"toy/marmot/web/query-log/launch/db"
+	"toy/marmot/web/query-log-echo/model/entity"
+	"toy/marmot/web/query-log-echo/launch/db"
 
 )
 

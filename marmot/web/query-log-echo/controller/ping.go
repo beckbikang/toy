@@ -1,14 +1,13 @@
 package controller
 
 import (
-	"github.com/gin-gonic/gin"
+	"net/http"
+	"github.com/labstack/echo/v4"
 )
 
-func Ping(ctx *gin.Context) {
+func Ping(ctx echo.Context) error{
 
-	GetResultSuccess(ctx,
-		gin.H{
-			"msg": "pong",
-		},
-	)
+
+	return ctx.JSON(http.StatusOK, "{pong}")
+
 }

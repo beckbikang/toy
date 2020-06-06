@@ -1,7 +1,7 @@
 package main
 
 import (
-	"toy/marmot/web/query-log/launch"
+	"toy/marmot/web/query-log-echo/launch"
 )
 
 //launch server
