@@ -64,13 +64,13 @@ type Configer struct {
 }
 
 type ServerCfg struct {
-	Address       string `toml:"addr'`
-	RunMod        string `toml:"run_mode'`
-	ReadTimeout   int    `toml:"read_timeout'`
-	WriteTimeout  int    `toml:"write_timeout'`
-	ConfigPath    string `toml:"config_path'`
+	Address       string `toml:"addr"`
+	RunMod        string `toml:"run_mode"`
+	ReadTimeout   int    `toml:"read_timeout"`
+	WriteTimeout  int    `toml:"write_timeout"`
+	ConfigPath    string `toml:"config_path"`
 	MaxBodyBytes  int    `toml:"max_body_bytes"`
-	CancelTimeout int    `cancel_timeout`
+	CancelTimeout int    `toml:"cancel_timeout"`
 }
 
 type AppCfg struct {
