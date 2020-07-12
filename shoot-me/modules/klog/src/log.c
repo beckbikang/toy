@@ -4,21 +4,22 @@
 //定义基本的结构
 typedef struct Klog{
     const char* logpath;//存储地址
-    int fd;//文件句柄
-    ULONG flag;//日志发送的地方
-    char splite_char[5];//分隔符
-    short is_show_line;//是否显示行+文件名,默认不显示
+    char *date;
+    FILE * fp;
+    int fd;
+    ulong flag;//日志发送的地方
+    char *splite_char;//分隔符
+    klevel l;
+    pthread_mutex_t mutex;//锁
 }KLogger;
 
 
-//初始化一个数据
-static KLogger KL = {"",-1,LOG_DEBUG,PUT_STD_OUT};
+//初始化一个全局日志
+static KLogger KL = {"","", NULL, -1,STD_OUT,"",KLOG_DEBUG};
 
 //根据条件初始化日志
-int logInit(const char *str_path,ULONG flag){
-    if (str_path == NULL){
-        return KLOG_FAILD;
-    }
+KLogger* logInit(const char *str_path,ulong flag){
+    
     KL.flag = flag;
     KL.logpath = str_path;
     if((flag & PUT_SFILE) == PUT_SFILE){
@@ -47,22 +48,7 @@ int setLogerPath(const char *str_path){
     }
     return KLOG_FAILD;
 }
-//设置保存的类型
-void setLogerSaveType(ULONG flag){
-    KL.flag = flag;
-}
-//添加一个种类型
-void addLogerSaveType(ULONG flag){
-     KL.flag = KL.flag| flag;
-}
-//移除一种类型
-void removeLogerSaveType(ULONG flag){
-    KL.flag = KL.flag & ~flag;
-}
-//获取flag
-ULONG getLogerFlag(){
-    return KL.flag;
-}
+
 
 //设置切分符号
 void setSpliteData(const char *split){
@@ -70,10 +56,6 @@ void setSpliteData(const char *split){
     if(strlen(split)> 0 && strlen(split) < len){
         strcpy(KL.splite_char, split);
     }
-}
-//设置是否显示文件信息
-void setShowFile(int is_show){
-    KL.is_show_line = is_show;
 }
 
 
@@ -112,7 +94,7 @@ char *getCurrentTime(){
     3 注意数据的长度
  
  **/
-void klogMesg(int level, char *file,int line,const char *fmt, ...){
+void kshow(int level, char *file,int line,const char *fmt, ...){
     char str_format[MAX_LOG_LEN];
     char buffer[MAX_LOG_LEN];
     va_list args;
