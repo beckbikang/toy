@@ -6,7 +6,7 @@ const (
 )
 
 type Result struct{
-	Code int
-	Msg string
-	Result interface{}
+	Code int `json:"code"`
+	Msg string `json:"message"`
+	Result interface{} `json:"data"`
 }

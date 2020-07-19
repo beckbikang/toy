@@ -40,3 +40,14 @@ locale = "Asia/Shanghai"
 conn_lifetime = 5
 max_open_conns = 5
 max_idle_conns = 2
+
+
+[redis_common]
+host="127.0.0.1"
+port=6379
+connect_timeout = 1
+read_timeout = 500
+write_timeout = 500
+max_idle = 2
+max_active = 20
+idle_timeout = 500

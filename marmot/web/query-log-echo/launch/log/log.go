@@ -30,11 +30,11 @@ func InitLog() *zap.Logger {
 	var err error
 	err = Gflg.LoadFromObject(&lcfg)
 	if err != nil {
-		panic("LoadFromObject faild")
+		panic("LoadFromObject failed")
 	}
 	LOGGER, err = Gflg.GetLogByKey(lcfg.Zfgs["1"].ServerName)
 	if err != nil {
-		panic("get log faild")
+		panic("get log failed")
 	}
 
 	return LOGGER

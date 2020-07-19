@@ -1,12 +1,12 @@
 package entity
 
 type LogEntity struct {
-	Id          int    `ddb:"id"`
-	Uid         int64  `ddb:"uid"`
-	LogType     int    `ddb:"log_type"`
-	LogTargetId int    `ddb:"log_target_id"`
-	LogId       int64  `ddb:"log_id"`
-	Mtime       string `ddb:"mtime"`
+	Id          int    `ddb:"id" json:"id"`
+	Uid         int64  `ddb:"uid" json:"uid"`
+	LogType     int    `ddb:"log_type" json:"log_type"`
+	LogTargetId int    `ddb:"log_target_id" json:"log_target_id"`
+	LogId       int64  `ddb:"log_id" json:"log_id"`
+	Mtime       string `ddb:"mtime" json:"update_time"`
 }
 
 //log query

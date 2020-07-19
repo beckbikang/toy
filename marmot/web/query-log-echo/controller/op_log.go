@@ -23,9 +23,7 @@ func init(){
 	uni = ut.New(z,z)
 	trans, _ = uni.GetTranslator("zh")
 	validate = validator.New()
-
 	zht.RegisterDefaultTranslations(validate, trans)
-
 }
 
 

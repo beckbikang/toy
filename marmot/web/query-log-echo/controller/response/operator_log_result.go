@@ -5,6 +5,7 @@ import "toy/marmot/web/query-log-echo/model/entity"
 type LogResult []LogResultIn
 
 type LogResultIn struct {
-	Log entity.LogEntity
-	LogContent entity.LogContentEntity
+	entity.LogEntity
+	From string `json:"from"`
+	To string `json:"to"`
 }

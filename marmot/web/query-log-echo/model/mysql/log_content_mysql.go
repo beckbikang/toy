@@ -47,10 +47,10 @@ func (lcdm *LogContentDaoMysql) GetLogContent(id int64, uid int64) (*entity.LogC
 	}
 
 	//fetch data
-	db := db.GetDb()
+	logdb := db.GetDb()
 
 	log.Printf("%s <= %v ", cond, values)
-	rows, err := db.Query(cond, values...)
+	rows, err := logdb.Query(cond, values...)
 	if err != nil {
 		log.Printf("fetch result: %v", err)
 		return nil, err
@@ -79,9 +79,9 @@ func(lcdm *LogContentDaoMysql) GetLogContentByIds(ids []int64, uid int64) ( []en
 		return nil,err
 	}
 	//fetch data
-	db := db.GetDb()
+	logdb := db.GetDb()
 	log.Printf("%s => %v ",cond, values)
-	rows, err := db.Query(cond, values...)
+	rows, err := logdb.Query(cond, values...)
 	if err != nil {
 		log.Printf("fetch result: %v",err)
 		return nil,err

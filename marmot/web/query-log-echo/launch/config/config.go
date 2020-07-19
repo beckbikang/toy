@@ -61,6 +61,7 @@ type Configer struct {
 
 	Lfg  flg.LConfig            `toml:"jackcfg"`
 	Zfgs map[string]flg.ZConfig `toml:"zapcfgs"`
+	RedisCommon RedisConf `toml:"redis_common"`
 }
 
 type ServerCfg struct {
@@ -99,4 +100,16 @@ type KafkaConfig struct {
 	User          string `toml:"user"`
 	Pswd          string `toml:"password"`
 	FromBeginning bool   `toml:"from_beginning"`
+}
+
+
+type RedisConf struct {
+	Host string `toml:"host"`
+	Port int `toml:"port"`
+	ConnectTimeout int  `toml:"connect_timeout"`
+	ReadTimeout int `toml:"read_timeout"`
+	WriteTimeout int `toml:"write_timeout"`
+	MaxIdle int `toml:"max_idle"`
+	MaxActive int `toml:"max_active"`
+	IdleTimeout int `toml:"idle_timeout"`
 }

@@ -11,7 +11,7 @@ import (
 	"toy/marmot/web/query-log-echo/launch/config"
 )
 
-func InitLauchHttpServer() {
+func InitLaunchHttpServer() {
 
 	//get server
 	srv := InitHttpServer()

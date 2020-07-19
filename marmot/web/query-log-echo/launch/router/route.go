@@ -12,14 +12,13 @@ func InitRouter(engine*echo.Echo){
 	v2 := engine.Group("/v2")
 	{
 		v2.GET("/ping", controller.Ping)
-		//v2.GET("/log/filted/lists.json",)
 	}
 
 	//v3
 	v3 := engine.Group("/v3")
 	{
 		v3.GET("/ping", controller.Ping)
-		v3.GET("/log/filted/lists.json",controller.OpLogList)
+		v3.GET("/log/filtered/lists.json",controller.OpLogList)
 	}
 
 }

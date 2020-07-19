@@ -13,12 +13,12 @@ func TestLoadGlobalConfig(t *testing.T) {
 
 	LoadGlobalConfig("../../conf", "dev")
 
-	t.Logf("%d", Gcfg.GetInt("server.read_timeout"))
-	t.Logf("%s", Gcfg.GetString("jackcfg.filename"))
-	t.Logf("%s", Gcfg.GetString("zapcfgs.1.level"))
+	t.Logf("%d\n", Gcfg.GetInt("server.read_timeout"))
+	t.Logf("%s\n", Gcfg.GetString("jackcfg.filename"))
+	t.Logf("%s\n", Gcfg.GetString("zapcfgs.1.level"))
 	asrt.Equal(60, Gcfg.GetInt("server.read_timeout"), "timeout not ok")
-
-	t.Logf("GetGlobalConfObject:%v", GetGlobalConfObject().Lfg)
+	t.Logf("GetGlobalConfObject:%v\n", GetGlobalConfObject().Lfg)
+	t.Logf("redisObj:%v\n",  Gcfg.GetString("redis_common.host"))
 
 	l := &flg.Logger{}
 

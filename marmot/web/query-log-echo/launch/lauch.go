@@ -6,6 +6,7 @@ import (
 	"toy/marmot/web/query-log-echo/launch/db"
 	"toy/marmot/web/query-log-echo/launch/engine"
 	kl "toy/marmot/web/query-log-echo/launch/log"
+	"toy/marmot/web/query-log-echo/launch/cache"
 )
 
 var (
@@ -17,8 +18,11 @@ func InitLaunch() {
 	flag.Parse()
 	config.LoadGlobalConfig(*confRoot, *env)
 	db.InitDb()
-	engine.InitLauchHttpServer()
+	engine.InitLaunchHttpServer()
 	kl.InitLog()
+	cache.InitRedisPool()
+
+
 
 	//defer
 	defer func() {
