@@ -7,11 +7,12 @@ import (
 	"toy/marmot/web/query-log-echo/model/Dao"
 	"toy/marmot/web/query-log-echo/model/entity"
 	"toy/marmot/web/query-log-echo/model/mysql"
-	"sort"
 	"toy/marmot/web/query-log-echo/util"
+	kl "toy/marmot/web/query-log-echo/launch/log"
+	"sort"
 	"toy/marmot/web/query-log-echo/launch/cache"
-	klog "toy/marmot/web/query-log-echo/launch/log"
 	"encoding/json"
+	"go.uber.org/zap"
 )
 
 func GetLogData(query *entity.LogQuery) ([]response.LogResultIn, error) {
@@ -20,6 +21,7 @@ func GetLogData(query *entity.LogQuery) ([]response.LogResultIn, error) {
 	var err error
 	var logData []entity.LogEntity
 
+	//get data from db
 	logDao = new(mysql.LogDaoMysql)
 	logData, err = logDao.GetLogData(query)
 	if err != nil || len(logData) <= 0 {
@@ -28,23 +30,23 @@ func GetLogData(query *entity.LogQuery) ([]response.LogResultIn, error) {
 	}
 
 	resultList := make([]response.LogResultIn, len(logData))
-	//uidList := make([]int64, 0)
-	uidList := util.Int64List{}
+	uidList := make([]int64, 0)
+
 	for i, info := range logData {
 		uidList = append(uidList, info.LogId)
 		resultList[i] = response.LogResultIn{LogEntity:info}
 	}
-	sort.Sort(uidList)
-
-	var redisKey string
+	sort.Sort(util.Int64List(uidList))
 
 	var logContentData []entity.LogContentEntity
 
-	//add cache
+	redisKey := ""
 	redisOk := false
 	redisKey,err = util.GetHashSliceInt64(uidList)
-	//klog.LOGGER.Info("redis key",zap.String("key",redisKey))
-	if err == nil {
+	log.Printf("ok=%v, key=%s", redisOk, redisKey)
+	kl.LOGGER.Info("redis key",zap.String("key",redisKey), zap.Bool("redis_ok",redisOk))
+
+	if err != nil {
 		var cacheVal []byte
 		cacheCmd := cache.CommonRedis.Get(redisKey)
 		if cacheCmd.Err() == nil {
@@ -52,12 +54,13 @@ func GetLogData(query *entity.LogQuery) ([]response.LogResultIn, error) {
 			if err == nil {
 				err = json.Unmarshal(cacheVal, logContentData)
 				if err == nil {
-					//klog.LOGGER.Info("get redis success")
+					kl.LOGGER.Info("get redis success")
 					redisOk = true
 				}
 			}
 		}
 	}
+
 
 
 	if !redisOk{
@@ -72,9 +75,10 @@ func GetLogData(query *entity.LogQuery) ([]response.LogResultIn, error) {
 			}
 		}
 
-
-		klog.LOGGER.Info("get db success")
+		kl.LOGGER.Info("get db success")
 	}
+
+
 
 	if err == nil {
 		for k, resultInfo := range resultList {

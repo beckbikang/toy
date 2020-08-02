@@ -1,2 +1,0 @@
-{"level":"info","time":"2020-05-31 23-17-43.703","line":"/Users/macy/go/src/toy/marmot/web/query-log-echo/launch/log/log_test.go:16","data":"abc","server":"query-log","int":11}
-{"level":"info","time":"2020-05-31 23-18-42.400","line":"/Users/macy/go/src/toy/marmot/web/query-log-echo/launch/log/log_test.go:16","data":"abc","server":"query-log","int":11}

@@ -15,14 +15,15 @@ var (
 )
 
 func InitLaunch() {
+	kl.InitLog()
 	flag.Parse()
 	config.LoadGlobalConfig(*confRoot, *env)
 	db.InitDb()
 	engine.InitLaunchHttpServer()
-	kl.InitLog()
 	cache.InitRedisPool()
 
 
+	kl.LOGGER.Info("init launch ok")
 
 	//defer
 	defer func() {
