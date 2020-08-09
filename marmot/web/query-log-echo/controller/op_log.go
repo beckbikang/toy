@@ -6,25 +6,8 @@ import (
 	"toy/marmot/web/query-log-echo/model/entity"
 	"github.com/labstack/echo/v4"
 	"github.com/go-playground/validator/v10"
-	"github.com/go-playground/locales/zh"
-	ut "github.com/go-playground/universal-translator"
-	zht "github.com/go-playground/validator/v10/translations/zh"
 	"fmt"
 )
-
-var (
-	uni      *ut.UniversalTranslator
-	validate *validator.Validate
-	trans ut.Translator
-)
-
-func init(){
-	z := zh.New()
-	uni = ut.New(z,z)
-	trans, _ = uni.GetTranslator("zh")
-	validate = validator.New()
-	zht.RegisterDefaultTranslations(validate, trans)
-}
 
 
 func getQueryStr(c echo.Context) (*entity.LogQuery, error) {
@@ -103,10 +86,10 @@ func getQueryStr(c echo.Context) (*entity.LogQuery, error) {
 
 	//tans
 	//validator
-	err = validate.Struct(query)
+	err = ValidateBiz.Struct(query)
 	if err != nil {
 		errs := err.(validator.ValidationErrors)
-		GetResultFail(c, fmt.Errorf("%s", errs.Translate(trans)))
+		GetResultFail(c, fmt.Errorf("%s", errs.Translate(Trans)))
 		return nil, err
 	}
 

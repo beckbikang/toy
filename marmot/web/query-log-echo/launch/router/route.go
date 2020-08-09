@@ -7,6 +7,23 @@ import (
 )
 
 
+//
+// there are no TOS at this moment, use at your own risk we take no responsibility
+//
+//     Schemes: http, https
+//     Host: localhost
+//     BasePath: /v1
+//     Version: 0.0.1
+//
+//     Consumes:
+//     - application/json
+//     - application/xml
+//
+//     Produces:
+//     - application/json
+//     - application/xml
+//
+// swagger:meta
 func InitRouter(engine*echo.Echo){
 
 	v2 := engine.Group("/v2")

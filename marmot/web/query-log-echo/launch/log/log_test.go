@@ -15,4 +15,5 @@ func TestLoadGlobalConfig(t *testing.T) {
 
 	LOGGER.Info("abc", zap.Int("int", 11))
 
+	LOGGER.Sync()
 }

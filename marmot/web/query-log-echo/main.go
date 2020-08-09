@@ -1,10 +1,14 @@
 package main
 
 import (
-	"toy/marmot/web/query-log-echo/launch"
-)
+	"toy/marmot/web/query-log-echo/cmd"
+ 	"log"
+ 	)
 
-//launch server
 func main() {
-	launch.InitLaunch()
+
+	err := cmd.Execute()
+	if err != nil {
+		log.Fatalf("%+v", err)
+	}
 }

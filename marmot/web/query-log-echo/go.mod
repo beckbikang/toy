@@ -14,6 +14,7 @@ require (
 	github.com/labstack/echo/v4 v4.1.16
 	github.com/onsi/ginkgo v1.14.0 // indirect
 	github.com/speps/go-hashids v2.0.0+incompatible
+	github.com/spf13/cobra v1.0.0
 	github.com/spf13/viper v1.7.0
 	github.com/stretchr/testify v1.5.1
 	go.uber.org/zap v1.10.0

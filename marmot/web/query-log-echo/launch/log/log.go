@@ -26,10 +26,15 @@ func InitLog() *zap.Logger {
 	lcfg.Lfg.Compress = cfg.Gcfg.GetBool("jackcfg.compress")
 
 	lcfg.Zfgs = make(map[string]flg.ZConfig)
-	lcfg.Zfgs["1"] = flg.ZConfig{Level: cfg.Gcfg.GetString("zapcfgs.1.level"),
+
+	sl.Printf("level=%s", cfg.Gcfg.GetString("zapcfgs.1.level"))
+
+	lcfg.Zfgs["1"] = flg.ZConfig{
+		Level:cfg.Gcfg.GetString("zapcfgs.1.level"),
 		IsDev:      cfg.Gcfg.GetBool("zapcfgs.1.isdev"),
 		LogMod:     int8(cfg.Gcfg.GetInt("zapcfgs.1.logmod")),
-		ServerName: cfg.Gcfg.GetString("zapcfgs.1.servername")}
+		ServerName: cfg.Gcfg.GetString("zapcfgs.1.servername"),
+	}
 
 	var err error
 	err = Gflg.LoadFromObject(&lcfg)
@@ -40,8 +45,8 @@ func InitLog() *zap.Logger {
 	if err != nil {
 		panic("get log failed")
 	}
-
-	sl.Printf("init log end %+v\n", LOGGER)
+	sl.Println("")
+	sl.Printf("init log end %+v\n", lcfg)
 	LOGGER.Info("log is ok , it's running!")
 	return LOGGER
 }

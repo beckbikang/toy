@@ -33,3 +33,23 @@ func InitLaunch() {
 
 	kl.LOGGER.Info("server end at launch")
 }
+
+func InitLaunchWithParam(cfgPath, envType string) {
+	kl.InitLog()
+	flag.Parse()
+	config.LoadGlobalConfig(cfgPath, envType)
+	db.InitDb()
+	engine.InitLaunchHttpServer()
+	cache.InitRedisPool()
+
+
+	kl.LOGGER.Info("init launch ok")
+
+	//defer
+	defer func() {
+		db.GetDb().Close()
+		kl.LOGGER.Sync()
+	}()
+
+	kl.LOGGER.Info("server end at launch")
+}

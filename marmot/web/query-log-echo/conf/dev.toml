@@ -20,7 +20,7 @@ compress=false
 [zapcfgs.1]
 level="info"
 isdev=true
-logmod=4
+logmod=3
 servername="query-log"
 
 [app]
