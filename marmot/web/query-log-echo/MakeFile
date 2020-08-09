@@ -1,0 +1,8 @@
+TARGET=main
+
+$(TARGET):
+	go build -o $(TARGET)
+
+
+clean :
+	rm -rf $(TARGET)
